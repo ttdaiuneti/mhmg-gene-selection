@@ -1,11 +1,11 @@
-# Radius-Free Neighbourhood Rough-Set Attribute Reduction — Code and Results
+# Overcoming Radius Saturation in Neighbourhood Rough-Set Attribute Reduction — Code and Results
 
 Supplementary code and raw results for the paper:
 
-> **Radius-Free Neighbourhood Rough-Set Attribute Reduction for High-Dimensional,
-> Small-Sample Data**  
+> **Overcoming Radius Saturation in Neighbourhood Rough-Set Attribute Reduction
+> for High-Dimensional, Small-Sample Data**  
 > Thi Thuy Tram Nguyen, Long Giang Nguyen, Manh Hung Nguyen, Thanh Dai Tran  
-> *IEEE Access*, 2026 (to appear)
+> Manuscript submitted to *IEEE Access*
 
 ---
 
