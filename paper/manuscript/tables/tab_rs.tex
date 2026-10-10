@@ -1,0 +1,26 @@
+\begin{table*}[!t]
+\centering
+\caption{Summary of the comparison within the neighbourhood rough-set family (17 datasets). Size: median over the datasets of the mean size; time: median seconds per fold; $D$: datasets with all 15 folds. NRS$^*$: best of the three radii on the test folds (Section~\ref{sec:exp:eps} gives the eight-radius version). In the lower block, $\Delta$ is relative to MHMG-80.}
+\label{tab:rs}
+\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrlrrr@{}}
+\toprule
+Model & Size & 3-NN & SVM & Time & $\Delta$ [95\% CI] & W/T/L & $p$ & $D$ \\
+\midrule
+MHMG & 7.4 & 0.771 & 0.775 & 7.0 & -- & -- & -- & 17 \\
+NRS ($\varepsilon=0.1$) & 3.8 & 0.665 & 0.697 & 0.8 & +0.106 [+0.063, +0.151] & 16/0/1 & $<$0.001 & 17 \\
+NRS ($\varepsilon=0.2$) & 5.1 & 0.684 & 0.717 & 1.0 & +0.087 [+0.055, +0.125] & 17/0/0 & $<$0.001 & 17 \\
+NRS ($\varepsilon=0.3$) & 6.6 & 0.704 & 0.730 & 1.3 & +0.067 [+0.034, +0.101] & 15/0/2 & 0.003 & 17 \\
+NRS$^*$ (best $\varepsilon$ on test) & 6.1 & 0.716 & 0.740 & 1.0 & +0.054 [+0.023, +0.090] & 15/0/2 & 0.013 & 17 \\
+NRS-cv & 5.8 & 0.705 & 0.733 & 5.3 & +0.066 [+0.040, +0.098] & 16/0/1 & $<$0.001 & 17 \\
+FNRS (50 attributes) & 50.0 & 0.788 & 0.815 & 14.0 & $-$0.017 [$-$0.040, +0.009] & 6/1/10 & 0.156 & 17 \\
+FNRS at the MHMG size & 7.4 & 0.740 & 0.761 & 2.4 & +0.030 [+0.006, +0.056] & 14/0/3 & 0.022 & 17 \\
+KNN-NRS & 1.0 & 0.625 & 0.655 & 4.5 & +0.146 [+0.092, +0.203] & 16/0/1 & $<$0.001 & 17 \\
+WKNRS & 4.3 & 0.744 & 0.744 & 144.3 & +0.027 [+0.012, +0.041] & 14/0/3 & 0.013 & 17 \\
+\midrule
+MHMG-80 & 3.7 & 0.709 & 0.736 & 0.0 & -- & -- & -- & 17 \\
+Adaptive NRS-80 & 3.3 & 0.527 & 0.559 & 0.7 & +0.183 [+0.135, +0.233] & 17/0/0 & $<$0.001 & 17 \\
+GBNRS-80 & 54.1 & 0.686 & 0.714 & 43.1 & +0.024 [$-$0.004, +0.059] & 11/0/6 & 0.225 & 17 \\
+\bottomrule
+\end{tabular*}
+\end{table*}

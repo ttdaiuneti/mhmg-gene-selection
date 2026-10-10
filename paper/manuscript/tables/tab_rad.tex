@@ -1,0 +1,24 @@
+\begin{table}[!t]
+\centering
+\caption{NRS over a wide grid of radii (17 datasets, 255 folds). Empty: folds with an empty reduct; size: mean number of attributes of the non-empty reducts; $D$: datasets with a non-empty reduct in all 15 folds; 3-NN: mean over these datasets. $^\dagger$Non-empty reducts at $\varepsilon=1.0$ arise only from rounding errors of the scaled values.}
+\label{tab:rad}
+\scriptsize
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\toprule
+$\varepsilon$ & Empty & Size & $D$ & 3-NN \\
+\midrule
+0.1 & 0 & 3.7 & 17 & 0.665 \\
+0.2 & 0 & 5.4 & 17 & 0.684 \\
+0.3 & 0 & 7.4 & 17 & 0.704 \\
+0.4 & 0 & 9.9 & 17 & 0.703 \\
+0.5 & 0 & 12.8 & 17 & 0.712 \\
+0.75 & 28 & 21.5 & 13 & 0.708 \\
+1.0$^\dagger$ & 226 & 12.5 & 1 & -- \\
+data-scaled & 255 & -- & 0 & -- \\
+\midrule
+NRS$^*_8$ (best on test) & -- & -- & 17 & 0.743 \\
+NRS-cv$_8$ & -- & -- & 17 & 0.709 \\
+MHMG & 0 & 7.5 & 17 & 0.771 \\
+\bottomrule
+\end{tabular*}
+\end{table}

@@ -1,7 +1,5 @@
 __pycache__/
 *.py[cod]
-*.npz
-data_asu/
-feas/
-*.log
+paper/feas/data/*.npz
+paper/data_asu/
 .DS_Store

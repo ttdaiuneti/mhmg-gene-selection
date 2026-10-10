@@ -1,0 +1,25 @@
+NRS_0.4: folds=255 empty=0 timeout=0 mean size (non-empty)=9.86
+NRS_0.5: folds=255 empty=0 timeout=0 mean size (non-empty)=12.84
+NRS_0.75: folds=255 empty=28 timeout=0 mean size (non-empty)=21.50
+NRS_1.0: folds=255 empty=226 timeout=0 mean size (non-empty)=12.48
+NRS_med: folds=255 empty=255 timeout=0 mean size (non-empty)=nan
+NRS*8 chosen radius counts: {'NRS_0.5': 4, 'NRS_0.75': 4, 'NRS_0.3': 4, 'NRS_0.2': 2, 'NRS_0.4': 2, 'NRS_0.1': 1}
+NRS-cv8 timeouts=0; choices={0.75: 55, 0.4: 47, 0.3: 43, 0.5: 40, 0.2: 36, 0.1: 34}
+KNN-NRS-E: size<=2 in 228/255 folds; median size 1.0; timeouts 0
+MHMG-3dp size: median of dataset means 15.3 (2dp: 7.4)
+Lymphoma MHMG-NRS*: old +0.096 in-fold +0.104 change +0.007
+H13: n=17 mean=+0.028 CI[+0.002,+0.054] W/T/L=12/0/5 p=0.0984 pHolm=0.0984 HELD
+H14: n=17 mean=+0.062 CI[+0.037,+0.087] W/T/L=15/0/2 p=0.0001 pHolm=0.0004 HELD
+H15_0.1: n=17 mean=+0.063 CI[+0.029,+0.098] W/T/L=15/0/2 p=0.0013 pHolm=0.0032 HELD
+H15s_0.1: n=17 mean=+0.048 CI[+0.024,+0.073] W/T/L=14/0/3 p=0.0007
+H15_0.2: n=17 mean=+0.077 CI[+0.050,+0.109] W/T/L=17/0/0 p=0.0000 pHolm=0.0001 HELD
+H15s_0.2: n=17 mean=+0.048 CI[+0.027,+0.070] W/T/L=14/0/3 p=0.0008
+H15_0.3: n=17 mean=+0.063 CI[+0.033,+0.097] W/T/L=13/0/4 p=0.0011 pHolm=0.0032 HELD
+H15s_0.3: n=17 mean=+0.042 CI[+0.022,+0.064] W/T/L=14/0/3 p=0.0021
+H16: n=17 mean=+0.196 CI[+0.138,+0.255] W/T/L=16/0/1 p=0.0000 pHolm=0.0002 HELD
+H16s: n=17 mean=+0.161 CI[+0.110,+0.213] W/T/L=16/0/1 p=0.0000
+C2: n=17 mean=+0.134 CI[+0.092,+0.177] W/T/L=15/0/2 p=0.0001
+C3: n=17 mean=+0.117 CI[+0.073,+0.165] W/T/L=16/0/1 p=0.0000
+D: n=17 mean=+0.022 CI[+0.008,+0.036] W/T/L=13/0/4 p=0.0267
+Ds: n=17 mean=+0.020 CI[+0.004,+0.038] W/T/L=12/0/5 p=0.0448
+NRS*8 mean 3-NN 0.743 SVM 0.764; NRS-cv8 0.709; MHMG 0.771

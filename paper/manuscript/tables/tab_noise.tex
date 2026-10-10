@@ -1,0 +1,21 @@
+\begin{table}[!t]
+\centering
+\caption{Mean 3-NN accuracy when a fraction $\rho$ of the training labels is flipped, and drop from $\rho=0$. $p$: Wilcoxon test of the drop at $\rho=0.2$ against MHMG (uncorrected); last column: datasets on which MHMG is more accurate at $\rho=0.2$.}
+\label{tab:noise}
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrrrrrr@{}}
+\toprule
+Method & $\rho=0$ & $0.1$ & $0.2$ & $\Delta_{0.1}$ & $\Delta_{0.2}$ & $p$ & MHMG better \\
+\midrule
+MHMG & 0.771 & 0.699 & 0.633 & $-$0.072 & $-$0.138 & -- & -- \\
+F & 0.714 & 0.695 & 0.646 & $-$0.018 & $-$0.067 & 0.002 & 5/17 \\
+FCQ & 0.744 & 0.705 & 0.639 & $-$0.039 & $-$0.105 & 0.020 & 6/17 \\
+ReliefF & 0.739 & 0.721 & 0.661 & $-$0.018 & $-$0.078 & 0.003 & 8/17 \\
+L1 & 0.765 & 0.686 & 0.602 & $-$0.079 & $-$0.162 & 0.080 & 11/17 \\
+NRS* & 0.716 & 0.625 & 0.566 & $-$0.091 & $-$0.151 & 0.431 & 16/17 \\
+FNRS & 0.788 & 0.717 & 0.656 & $-$0.071 & $-$0.131 & 0.678 & 3/17 \\
+All attributes & 0.752 & 0.724 & 0.673 & $-$0.027 & $-$0.079 & 0.001 & 4/17 \\
+\bottomrule
+\end{tabular*}
+\end{table}

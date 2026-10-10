@@ -1,0 +1,19 @@
+\begin{table*}[!t]
+\centering
+\caption{MHMG against selectors that tune their size within ten attributes (17 datasets). Size: median number of
+attributes; $\Phi$: median Nogueira index; time: median seconds per fold, tuning included.}
+\label{tab:ten}
+\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrrlrr@{}}
+\toprule
+Method & Size & 3-NN & SVM & $\Phi$ & Time & $\Delta$ [95\% CI] & W/T/L & $p$ \\
+\midrule
+MHMG & 7.4 & 0.771 & 0.775 & 0.13 & 6.98 & -- & -- & -- \\
+L1-cv10 & 7.4 & 0.778 & 0.786 & 0.39 & 0.18 & $-$0.007 [$-$0.028, +0.015] & 5/0/12 & 0.706 \\
+FCQ-cv10 & 7.4 & 0.754 & 0.760 & 0.33 & 0.04 & +0.017 [$-$0.006, +0.043] & 8/0/9 & 0.706 \\
+ReliefF-cv10 & 6.5 & 0.740 & 0.748 & 0.58 & 0.31 & +0.031 [$-$0.000, +0.063] & 10/1/6 & 0.293 \\
+F-cv10 & 6.3 & 0.716 & 0.737 & 0.59 & 0.04 & +0.055 [+0.015, +0.097] & 12/0/5 & 0.081 \\
+RFE-cv10 & 6.8 & 0.698 & 0.721 & 0.33 & 3.80 & +0.073 [+0.034, +0.116] & 14/0/3 & 0.005 \\
+\bottomrule
+\end{tabular*}
+\end{table*}
