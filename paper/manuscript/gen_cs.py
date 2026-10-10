@@ -1,6 +1,6 @@
 """Per-dataset tables of the neighbourhood rough-set family (3-NN, SVM, size and time), the Friedman/Nemenyi CD
 diagram of the family and the radius-sensitivity figure, from the raw fold-level files. Writes tables/tab_fam_*.tex,
-figures/fig_fam_cd.pdf, figures/fig_eps.pdf and cs_numbers.tex. Never type these numbers by hand."""
+figures/fig_fam_cd.pdf, figures/fig_eps.pdf and cs_numbers.tex."""
 import os, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -147,7 +147,7 @@ for i, (nm, rk_) in enumerate(r.items()):
 fig.tight_layout(); fig.savefig(FIGD / "fig_fam_cd.pdf"); plt.close(fig)
 
 # radius sensitivity: NRS at each radius against MHMG, which has no radius
-# radii 0.1-0.3 from e1, 0.4-0.5 from the E8 grid (e8rev/the study protocol); all 17 datasets have non-empty reducts here
+# radii 0.1-0.3 from e1, 0.4-0.5 from the E8 grid (e8rev); all 17 datasets have non-empty reducts here
 e8 = pd.read_csv(G / "e8rev" / "raw_e8.csv"); grid = pd.concat([e1[e1.method.str.startswith("NRS_")], e8[e8.part == "A"]])
 eps = ["0.1", "0.2", "0.3", "0.4", "0.5"]
 for e in eps:

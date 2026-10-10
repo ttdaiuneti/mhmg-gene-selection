@@ -1,4 +1,4 @@
-"""E3 amendment 4 analysis (written before its results): MHMG vs FNRS at rho = 0 (E1) and 0.2."""
+"""Label noise: MHMG vs FNRS at rho = 0 (E1) and 0.2."""
 from pathlib import Path
 import numpy as np, pandas as pd
 from scipy.stats import wilcoxon

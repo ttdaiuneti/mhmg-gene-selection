@@ -1,6 +1,6 @@
-"""Pilot H1 (prereg.md): MHMG-RS criterion vs class-balanced MHMG criterion, same forward search.
+"""MHMG-RS criterion vs class-balanced MHMG criterion, same forward search.
 
-The search reproduces research-commons hierarchical-mhmg/mhmg-rs-reducer/MHMG_RS_Reducer.py exactly
+The search reproduces the published MHMG-RS reducer exactly
 (MinMax on the training data, Euclidean distance, gamma rounded to 2 decimals, first strictly-better
 candidate wins, stop when the rounded gamma does not increase); only the criterion differs.
 Distances are updated incrementally (squared distances), which does not change any granule.

@@ -1,4 +1,4 @@
-"""E3 amendment 2 analysis (written before its results): MHMG vs NRS* (clean-data radius) at rho = 0 and 0.2."""
+"""Label noise: MHMG vs NRS* (clean-data radius) at rho = 0 and 0.2."""
 from pathlib import Path
 import numpy as np, pandas as pd
 from scipy.stats import wilcoxon

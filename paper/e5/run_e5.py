@@ -1,6 +1,6 @@
 """E5 : competitors tuned within q <= 10 (inner 3-fold CV on the outer training part), outer folds of E1.
 Resumable, append-only; one row per (dataset, rep, fold, method). MHMG and ALL are taken from e1/raw_results.csv.
-Usage: python run_e4.py [workers] | python run_e4.py --smoke (one fold, timing only, accuracies not printed)."""
+Usage: python run_e5.py [workers] | python run_e5.py --smoke (one fold, timing only, accuracies not printed)."""
 import os
 for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "MKL_NUM_THREADS"):
     os.environ.setdefault(_v, "1")

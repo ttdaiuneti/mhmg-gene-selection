@@ -1,4 +1,4 @@
-"""E3 amendment 1 analysis (written before its results): MHMG vs NRS (each radius, NRS* with the clean-data radius)
+"""Label noise: MHMG vs NRS (each radius, NRS* with the clean-data radius)
 and FNRS under label noise. rho = 0 rows from e1/raw_results.csv; MHMG under noise from raw_noise.csv."""
 import sys
 from pathlib import Path

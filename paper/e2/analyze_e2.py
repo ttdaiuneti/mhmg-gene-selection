@@ -1,4 +1,4 @@
-"""E2 analysis (written before the E2 results were inspected; descriptive, the study protocol). Reads raw_curves.csv only.
+"""Accuracy versus number of selected genes (descriptive). Reads raw_curves.csv only.
 Outputs: curves.csv, e2_numbers.tex (macros), manuscript/figures/fig_curves.pdf."""
 from pathlib import Path
 import numpy as np, pandas as pd

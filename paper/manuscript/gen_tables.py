@@ -1,4 +1,4 @@
-"""Generate every table and number macro of the manuscript from the locked E1 files (no hand-typed numbers)."""
+"""Generate every table and number macro of the manuscript from the fold-level result files (no hand-typed numbers)."""
 import sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -284,7 +284,7 @@ for c in NC:
     mac(f"noiseDropOne{NN[c]}", f"{D1[c].mean():+.3f}")
     if c != "MHMG":
         mac(f"noiseWin{NN[c]}", int((A2.MHMG > A2[c]).sum())); mac(f"noiseWinOne{NN[c]}", int((A1.MHMG > A1[c]).sum()))
-# H4 (pre-registered for E3): one-sided, Holm over L1 and FCQ
+# H4: one-sided, Holm over L1 and FCQ
 ph = {c: wilcoxon(D2.MHMG, D2[c], alternative="less", zero_method="zsplit").pvalue for c in ("L1", "FCQ")}
 oh = sorted(ph, key=ph.get)
 hh = {c: min(1.0, max(ph[o] * (len(oh) - j) for j, o in enumerate(oh[:i + 1]))) for i, c in enumerate(oh)}
@@ -297,7 +297,7 @@ mac("mechNeOne", f"{100 * mech.loc[0.1, 'ne_flipped']:.1f}"); mac("mechShareOne"
 mac("mechNeTwo", f"{100 * mech.loc[0.2, 'ne_flipped']:.1f}"); mac("mechShareTwo", f"{100 * mech.loc[0.2, 'share_flipped']:.1f}")
 sz2 = n3[(n3.method == "MHMG")].groupby(["dataset", "rho"])["size"].mean().groupby(level="rho").median()
 mac("noiseSizeOne", f"{sz2.loc[0.1]:.1f}"); mac("noiseSizeTwo", f"{sz2.loc[0.2]:.1f}")
-# ---- tuned comparison (e4/raw_e4.csv; MHMG and ALL from E1 on the same folds; analysis as in e4/the study protocol) ----
+# ---- tuned comparison (e4/raw_e4.csv; MHMG and ALL from E1 on the same folds; analysis as in e4/analyze_e4.py) ----
 E4 = HERE.parent / "e4"
 t4 = pd.read_csv(E4 / "raw_e4.csv")
 TU = ["L1-cv", "FCQ-cv", "ReliefF-cv", "RFE-cv", "F-cv", "NRS-cv"]

@@ -1,5 +1,5 @@
-"""Macros for the tuned q<=10 comparison (E5), the rounding sensitivity (e1/check_rounding.csv) and the expected-energy
-variant (MHMG-Stable/kill). Writes extra_numbers.tex. Never type these numbers by hand."""
+"""Macros for the tuned q<=10 comparison (E5), the rounding sensitivity (e1/check_rounding.csv) and, when its input file is present,
+the expected-energy variant (not used in the article). Writes extra_numbers.tex."""
 from pathlib import Path
 import numpy as np, pandas as pd
 H = Path(__file__).resolve().parent; G = H.parent; ROOT = G.parent
@@ -29,7 +29,7 @@ def phi(d):
     return pd.Series({ds: nog([list(map(int, str(x).split("|"))) for x in gg.reduct], int(gg.n_attr.iloc[0])) for ds, gg in d.groupby("dataset")})
 pm = phi(e1[e1.method == "MHMG"])
 # the expected-energy variant (macros rm*) needs a separate raw file that is not part of this repository; the paper does not use it
-kf = ROOT / "MHMG-Stable" / "kill" / "raw_kill.csv"
+kf = G / "optional" / "raw_expected_energy.csv"
 if kf.exists():
     k = pd.read_csv(kf); pr = phi(k)
     mac("rmPhi", pr.median(), "{:.2f}"); mac("rmPhiMhmg", pm.median(), "{:.2f}"); mac("rmPhiHigher", str(int((pr > pm).sum())))

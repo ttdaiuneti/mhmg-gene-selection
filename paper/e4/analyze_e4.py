@@ -1,4 +1,4 @@
-"""E4 analysis exactly as fixed in the study protocol (H5-H7 + descriptive). Inputs: raw_e4.csv (tuned selectors) and
+"""E4 analysis (tuned selectors against MHMG, descriptive). Inputs: raw_e4.csv (tuned selectors) and
 e1/raw_results.csv (MHMG, ALL on the same folds). Output: e4_summary.csv and printed report."""
 from pathlib import Path
 import numpy as np, pandas as pd

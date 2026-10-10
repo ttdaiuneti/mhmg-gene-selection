@@ -1,4 +1,4 @@
-"""The 17 datasets fixed in the study protocol (cached as npz)."""
+"""The 17 datasets (cached as npz)."""
 from pathlib import Path
 import numpy as np, pandas as pd
 ROOT = Path(__file__).resolve().parent.parent

@@ -1,4 +1,4 @@
-"""Analysis fixed before results (the study protocol H1-H3 + reported stability / Friedman). Reads raw_results.csv only."""
+"""Analysis of the main comparison: paired differences, stability and Friedman tests. Reads raw_results.csv only."""
 import sys
 from pathlib import Path
 import numpy as np, pandas as pd

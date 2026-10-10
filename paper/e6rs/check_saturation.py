@@ -1,4 +1,4 @@
-"""Saturation check (the study protocol, descriptive): rep 0 of E1. For NRS at eps in {0.1,0.2,0.3}, on the training fold and the
+"""Saturation check (descriptive): rep 0 of E1. For NRS at eps in {0.1,0.2,0.3}, on the training fold and the
 NRS reduct stored in e1/raw_results.csv: is every safety radius > eps at the stopping point (gamma_N = 1)? For the MHMG
 reduct of the same fold: share of samples with radius > eps, and its size. Writes saturation.csv and sat_numbers.tex."""
 import sys, warnings

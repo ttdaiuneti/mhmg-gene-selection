@@ -1,13 +1,13 @@
 """Macros e8_numbers.tex and tables tab_rad.tex (radius grid) and tab_ctrl.tex (control comparisons) from the E8-rev
-runs (e8rev/raw_e8.csv, analysis as registered in e8rev/analyze_e8.py), plus the SVM comparison FNRS-50 vs MHMG
-from e1. Never type these numbers by hand."""
+runs (e8rev/raw_e8.csv, analysis in e8rev/analyze_e8.py), plus the SVM comparison FNRS-50 vs MHMG
+from e1."""
 import sys, io, contextlib
 from pathlib import Path
 import numpy as np, pandas as pd
 H = Path(__file__).resolve().parent; G = H.parent
 sys.path.insert(0, str(G / "e8rev"))
 with contextlib.redirect_stdout(io.StringIO()):
-    import analyze_e8 as A  # noqa: E402  (registered analysis; rewrites e8rev/analysis.txt identically)
+    import analyze_e8 as A  # noqa: E402  (rewrites e8rev/analysis.txt)
 M = {}
 f3 = lambda v: f"{v:+.3f}".replace("-", "$-$")
 for k, key in (("H13", "Nstar"), ("H14", "Ncv"), ("H15_0.1", "QA"), ("H15_0.2", "QB"), ("H15_0.3", "QC"), ("H16", "Rnd"),

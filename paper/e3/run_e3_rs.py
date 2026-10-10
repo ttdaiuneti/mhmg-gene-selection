@@ -1,4 +1,4 @@
-"""E3 amendment 1 : NRS (three radii) and FNRS under the same label noise as run_e3.py; resumable."""
+"""E3 (radius-based models) : NRS (three radii) and FNRS under the same label noise as run_e3.py; resumable."""
 import os
 for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "MKL_NUM_THREADS"):
     os.environ.setdefault(_v, "1")

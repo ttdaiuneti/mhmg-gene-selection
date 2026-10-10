@@ -1,4 +1,4 @@
-"""E8-rev : extra runs requested by review v3 round 1. Resumable; one row per (dataset, rep, fold, method).
+"""E8-rev : additional runs (radius grid, equal size, controls, rounding, imputation). Resumable; one row per (dataset, rep, fold, method).
 Parts: A wide NRS radius grid + NRS-cv8, B MHMG truncated to NRS size, C random baselines + KNN-NRS (Euclidean),
 D MHMG with 3-decimal rounding, E Lymphoma with in-fold mean imputation."""
 import os
@@ -71,7 +71,7 @@ def acc(Xtr, ytr, Xte, yte, B):
 
 
 def knn_dep_euclid(X, y, B, k=3):
-    """wang_knn_nrs.knn_dependency with the Euclidean metric in place of Chebyshev (prereg C3)."""
+    """wang_knn_nrs.knn_dependency with the Euclidean metric in place of Chebyshev (part C)."""
     n = X.shape[0]
     if len(B) == 0:
         return 1.0 if len(set(y)) == 1 else 0.0

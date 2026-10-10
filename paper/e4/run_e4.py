@@ -72,7 +72,7 @@ def tune(meth, Xtr, ytr, inner):
     grid = list(score)
     best = max(grid, key=lambda c: (np.mean(score[c]), -np.mean(size[c]), -grid.index(c)))
     B, cfg = list(final_fn(Xtr, ytr, best)), best
-    if meth == "L1-cv" and not B:                       # prereg: next larger C giving >= 1 gene
+    if meth == "L1-cv" and not B:                       # next larger C giving >= 1 gene
         for C in CS[CS.index(best) + 1:]:
             B, cfg = l1_subset(Xtr, ytr, C), C
             if B:

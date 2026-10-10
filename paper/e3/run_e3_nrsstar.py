@@ -1,4 +1,4 @@
-"""E3 amendment 2 : NRS at the clean-data radius delta* of each dataset, label noise rho = 0.2; resumable."""
+"""E3 (NRS*) : NRS at the clean-data radius delta* of each dataset, label noise rho = 0.2; resumable."""
 import os
 for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "MKL_NUM_THREADS"):
     os.environ.setdefault(_v, "1")

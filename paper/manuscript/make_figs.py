@@ -1,4 +1,4 @@
-"""Figures 2-6 of the manuscript, generated from the locked result files (style as e2/analyze_e2.py: serif, cm math)."""
+"""Figures 2-6 of the manuscript, generated from the fold-level result files (style as e2/analyze_e2.py: serif, cm math)."""
 import os, sys
 from pathlib import Path
 import numpy as np, pandas as pd

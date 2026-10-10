@@ -1,4 +1,4 @@
-"""Macros for the size-matched MHMG vs FNRS comparison (e7size/the study protocol) from e7size/raw_size.csv."""
+"""Macros for the size-matched MHMG vs FNRS comparison from e7size/raw_size.csv."""
 from pathlib import Path
 import numpy as np, pandas as pd
 from scipy.stats import wilcoxon

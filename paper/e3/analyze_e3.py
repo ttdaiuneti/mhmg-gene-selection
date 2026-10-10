@@ -1,4 +1,4 @@
-"""E3 analysis (fixed before results, the study protocol). rho = 0 rows from e1/raw_results.csv (same folds and code)."""
+"""Label-noise analysis. rho = 0 rows from e1/raw_results.csv (same folds and code)."""
 import sys
 from pathlib import Path
 import numpy as np, pandas as pd

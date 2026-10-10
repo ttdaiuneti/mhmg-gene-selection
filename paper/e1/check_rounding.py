@@ -1,4 +1,4 @@
-"""Sensitivity of MHMG to its stopping tolerance (review round 1, S5): the published search rounds gamma to 2 decimals;
+"""Sensitivity of MHMG to its stopping tolerance: the published search rounds gamma to 2 decimals;
 here the same search with 3 decimals on the 85 folds of the first repetition. Compares subset size and 3-NN accuracy
 with the reported 2-decimal runs (raw_results.csv). Exploratory."""
 import os

@@ -1,4 +1,4 @@
-"""Control for the RQ6 mechanism (review round 1, R7): fraction of correctly labelled training samples whose nearest
+"""Control for the label-noise mechanism: fraction of correctly labelled training samples whose nearest
 enemy is a flipped sample, under (a) the MHMG genes selected on the noisy fold, (b) the F genes of the same size
 selected on the noisy fold, (c) random genes of the same size. Same flips as run_e3.py. Exploratory."""
 import sys, warnings

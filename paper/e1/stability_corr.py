@@ -1,4 +1,4 @@
-"""EXPLORATORY (decided after seeing E1 results, user request 2026-10-05): correlation-aware stability
+"""Exploratory: correlation-aware stability
 Phi_C = 1 - tr(C S) / tr(C Sigma0)  (Sechidis, Papangelou, Nogueira, Weatherall & Brown, ECML-PKDD 2019),
 C_fg = |rho_fg| if |rho_fg| >= theta else 0 (C_ff = 1), rho on the full table (label-free). C = I gives Nogueira 2018.
 Also: mean within-set |rho| (redundancy) of each selected set. Reads raw_results.csv only."""

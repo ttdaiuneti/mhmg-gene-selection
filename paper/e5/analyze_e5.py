@@ -1,5 +1,4 @@
-"""E5 analysis exactly as fixed in the study protocol (H8, H9 by bootstrap CI; descriptive Wilcoxon/Holm, size, stability,
-time, SVM). Inputs: raw_e5.csv and e1/raw_results.csv (MHMG). Output: e5_summary.csv and printed report."""
+"""E5 analysis (bootstrap CI; descriptive Wilcoxon/Holm, size, stability, time, SVM). Inputs: raw_e5.csv and e1/raw_results.csv (MHMG). Output: e5_summary.csv and printed report."""
 from pathlib import Path
 import numpy as np, pandas as pd
 from scipy.stats import wilcoxon

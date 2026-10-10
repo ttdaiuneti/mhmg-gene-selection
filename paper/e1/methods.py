@@ -1,5 +1,5 @@
-"""Selectors for E1 . MHMG = published greedy (P.forward); NRS/FNRS = vectorised re-implementations of the
-research-commons baselines (ijar-nrs/NRS_Reduction.py, fcfp/FNRS_AR.py)."""
+"""Selectors of the main comparison. MHMG = published greedy search (src/mhmg.py); NRS and FNRS = vectorised
+re-implementations of the reference NRS and FNRS code (src/nrs_fnrs.py implements the same two)."""
 import sys
 import numpy as np
 from sklearn.feature_selection import RFE, f_classif

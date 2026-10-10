@@ -1,7 +1,7 @@
-"""Round-2 review checks (exploratory, fixed before computing):
+"""Checks of ties and base rates (exploratory):
 (1) tie prevalence per dataset: share of attributes with at least one pair of samples of different classes with equal
     value; median (over attributes) share of samples with an empty single-attribute granule (delta = 0); min-max on all data;
-(2) base rate of mean-blind attributes (same definition as the E8b analysis: ANOVA p > 0.05 and Bonferroni-corrected
+(2) base rate of mean-blind attributes (ANOVA p > 0.05 and Bonferroni-corrected
     one-vs-rest KS p < 0.05) among ALL attributes of each dataset, against the share among the MHMG selections;
 (3) on the tie-free datasets (< 5 % tied attributes): Spearman correlation over 300 random attributes between E({a}) and
     each runs bound of Proposition prop:runs.
@@ -11,11 +11,11 @@ from pathlib import Path
 import numpy as np, pandas as pd
 from scipy.stats import ks_2samp, spearmanr
 from sklearn.feature_selection import f_classif
-H = Path(__file__).resolve().parent; G = H.parents[1]; G2 = G.parent / "MHMG-Gene2"
+H = Path(__file__).resolve().parent; G = H.parents[1]; G2 = G / "optional"
 sys.path.insert(0, str(G / "e1")); import data as DA
 warnings.filterwarnings("ignore")
 # optional input from a separate study (macros baseAbove/baseBelow); not used by the paper and not part of this repository
-sf = G2 / "e8" / "e8b_share.csv"
+sf = G2 / "e8b_share.csv"
 share = pd.read_csv(sf).pivot(index="dataset", columns="method", values="mb_share") if sf.exists() else None
 
 

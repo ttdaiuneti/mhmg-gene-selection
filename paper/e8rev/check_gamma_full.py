@@ -1,4 +1,4 @@
-"""Post-review check (round 2, NEW-1): gamma_N(C) on every training fold at eps 0.75, 1.0 and the data-scaled radius,
+"""Check: gamma_N(C) on every training fold at eps 0.75, 1.0 and the data-scaled radius,
 and whether non-empty NRS reducts at eps = 1.0 coincide with scaled attribute ranges above 1 (rounding)."""
 import sys, numpy as np, pandas as pd
 sys.path[:0] = ["../e1", "."]

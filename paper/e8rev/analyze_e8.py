@@ -1,4 +1,5 @@
-"""Analysis of E8-rev exactly as in the study protocol (H13-H16 + descriptive parts). Writes e8_numbers.tex and analysis.txt."""
+"""Analysis of E8-rev (paired differences, bootstrap CI, Holm correction, descriptive parts). Writes analysis.txt;
+e8_numbers.tex is written by manuscript/gen_e8.py."""
 from pathlib import Path
 import numpy as np, pandas as pd
 from scipy.stats import wilcoxon

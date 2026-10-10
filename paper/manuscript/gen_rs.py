@@ -1,12 +1,12 @@
-"""Table tab:rs and macros rs_numbers.tex for the comparison within the neighbourhood rough-set family (E-RS prereg,
-e6rs/the study protocol), from e6rs/raw_ers.csv, e1/raw_results.csv and e4/raw_e4.csv. Never type these numbers by hand."""
+"""Table tab:rs and macros rs_numbers.tex for the comparison within the neighbourhood rough-set family,
+from e6rs/raw_ers.csv, e1/raw_results.csv and e4/raw_e4.csv."""
 from pathlib import Path
 import numpy as np, pandas as pd
 from scipy.stats import wilcoxon
 H = Path(__file__).resolve().parent; G = H.parent
 e1 = pd.read_csv(G / "e1" / "raw_results.csv"); e4 = pd.read_csv(G / "e4" / "raw_e4.csv"); rs = pd.read_csv(G / "e6rs" / "raw_ers.csv")
 _fix = G / "e6rs" / "raw_ers_gbfix.csv"
-if _fix.exists() and len(pd.read_csv(_fix)) == 255:   # GBNRS rerun with the reference loop (e6rs/AMENDMENT_gbnrs.md)
+if _fix.exists() and len(pd.read_csv(_fix)) == 255:   # GBNRS rerun with the reference loop (e6rs/raw_ers_gbfix.csv)
     rs = pd.concat([rs[rs.method != "GBNRS"], pd.read_csv(_fix)], ignore_index=True)
 def per_ds(d, meth):
     x = d[d.method == meth]; g = x.groupby("dataset")

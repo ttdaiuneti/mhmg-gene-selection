@@ -1,4 +1,4 @@
-"""E3 amendment 4 : FNRS (E1 settings, cap 50) under label noise; resumable."""
+"""E3 (FNRS) : FNRS (E1 settings, cap 50) under label noise; resumable."""
 import os
 for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "MKL_NUM_THREADS"):
     os.environ.setdefault(_v, "1")
