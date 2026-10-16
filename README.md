@@ -1,10 +1,9 @@
-# Overcoming Radius Saturation in Neighbourhood Rough-Set Attribute Reduction for High-Dimensional, Small-Sample Data
+# Saturation of the Global Radius in Neighbourhood Rough-Set Attribute Reduction for High-Dimensional Small-Sample Data
 
 Code and fold-level results for the manuscript
 
 > Thi Thuy Tram Nguyen, Long Giang Nguyen, Manh Hung Nguyen, Thanh Dai Tran.
-> *Overcoming Radius Saturation in Neighbourhood Rough-Set Attribute Reduction for High-Dimensional, Small-Sample Data.*
-> Submitted to IEEE Access.
+> *Saturation of the Global Radius in Neighbourhood Rough-Set Attribute Reduction for High-Dimensional Small-Sample Data.*
 
 The study compares the maximal homogeneous metric granules criterion (MHMG, Nguyen et al., IJAR) with neighbourhood
 rough-set models (NRS, FNRS, KNN-NRS, WKNRS, GBNRS, adaptive NRS) and with standard selectors on seventeen

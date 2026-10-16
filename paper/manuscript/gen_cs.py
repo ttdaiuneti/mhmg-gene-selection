@@ -16,10 +16,22 @@ LABEL = {"lymphoma_2classes": "Lymphoma", "leukemia": "Leukemia", "BurkittLympho
          "colon-cancer": "Colon", "duke-breast-cancer": "Duke", "CLL_SUB_111": "CLL-SUB", "GLIOMA": "Glioma",
          "GLI_85": "GLI-85", "Prostate_GE": "Prostate", "SMK_CAN_187": "SMK-CAN", "TOX_171": "TOX-171", "lung": "Lung"}
 
-_CM = os.environ.get("FIG_STYLE") == "cm"   # Computer Modern for the Springer (sn-jnl) version; Times for IEEE Access
-plt.rcParams.update({"font.family": "serif", "font.serif": (["cmr10"] if _CM else ["Times New Roman", "Times", "STIXGeneral"]),
-                     "mathtext.fontset": ("cm" if _CM else "stix"), "axes.formatter.use_mathtext": True,
+_CM = os.environ.get("FIG_STYLE") == "cm"   # Computer Modern for the single-column layout; Times for the two-column layout
+_TSP = os.environ.get("FIG_STYLE") == "tsp"   # Arial, labels of at least 8 pt, capital panel letters
+_SANS = os.environ.get("FIG_STYLE") in ("sans", "tsp")   # Arial/Helvetica for journals that ask for sans-serif artwork
+plt.rcParams.update({"font.family": "sans-serif" if _SANS else "serif",
+                     "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
+                     "font.serif": (["cmr10"] if _CM else ["Times New Roman", "Times", "STIXGeneral"]),
+                     "mathtext.fontset": ("cm" if _CM else "stixsans" if _SANS else "stix"), "axes.formatter.use_mathtext": True,
                      "font.size": 8, "axes.linewidth": 0.8, "pdf.fonttype": 42, "ps.fonttype": 42})
+if _TSP:   # every text at least 8 pt
+    import matplotlib.figure as _mf, matplotlib.text as _mt
+    _orig_savefig = _mf.Figure.savefig
+    def _savefig(self, *a, **k):
+        for t in self.findobj(_mt.Text):
+            if t.get_text() and t.get_fontsize() < 8: t.set_fontsize(8)
+        return _orig_savefig(self, *a, **k)
+    _mf.Figure.savefig = _savefig
 ORDER = DA.NAMES
 FIGD = Path(os.environ.get("FIG_DIR", H / "figures"))
 e1 = pd.read_csv(G / "e1" / "raw_results.csv"); e4 = pd.read_csv(G / "e4" / "raw_e4.csv")
@@ -115,7 +127,7 @@ M.update(famFriedChi=f"{chi:.1f}", famFriedP=("$<$0.001" if p < 0.001 else f"{p:
          famSvmFriedP=("$<$0.001" if ps < 0.001 else f"{ps:.3f}"),
          famMedSize=f"{max(F[c]['size'].median() for c in A_CD):.0f}")
 assert not sig("MHMG", "FNRS-$q$") and not sig("MHMG", "WKNRS") and all(sig("MHMG", c) for c in ("NRS$^*$", "NRS-cv", "KNN-NRS")), r
-fig, ax = plt.subplots(figsize=(3.5, 1.6))
+fig, ax = plt.subplots(figsize=((5.0 if _TSP else 3.5), 1.6))
 lo, hi = 1, k
 ax.set_xlim(lo - 1.6, hi + 1.6); ax.set_ylim(0.2, 1.1); ax.axis("off")
 AX = 0.82
@@ -156,7 +168,7 @@ na = [grid[grid.method == f"NRS_{e}"].groupby("dataset").knn_acc.mean().mean() f
 ns = [grid[grid.method == f"NRS_{e}"].groupby("dataset")["size"].mean().mean() for e in eps]
 ma, ms = mean["knn_acc"]["MHMG"].mean(), mean["size"]["MHMG"].mean()
 nwin = [int((grid[grid.method == f"NRS_{e}"].groupby("dataset").knn_acc.mean().loc[ORDER] > mean["knn_acc"]["MHMG"]).sum()) for e in eps]
-fig, axs = plt.subplots(1, 2, figsize=(3.5, 1.6))
+fig, axs = plt.subplots(1, 2, figsize=(5.2, 2.4) if _TSP else (3.5, 1.6))
 x = [float(e) for e in eps]
 axs[0].plot(x, na, "s-", color="tab:brown", ms=4, label="NRS"); axs[0].axhline(ma, color="k", lw=1, ls="--", label="MHMG")
 axs[0].set_xlabel(r"radius $\varepsilon$"); axs[0].set_ylabel("mean 3-NN accuracy"); axs[0].set_xticks(x)
@@ -167,6 +179,9 @@ axs[1].set_ylim(0, max(ns + [ms]) * 1.25)
 axs[0].legend(fontsize=6.5, frameon=True, loc="center left", bbox_to_anchor=(0.02, 0.62))
 for a in axs:
     a.grid(alpha=0.3)
+if _TSP:
+    for a, L in zip(axs, "AB"):
+        a.text(0.02, 0.98, L, transform=a.transAxes, fontsize=10, fontweight="bold", va="top")
 fig.tight_layout(); fig.savefig(FIGD / "fig_eps.pdf"); plt.close(fig)
 for e, a_, s_, w in zip(("A", "B", "C", "D", "E"), na, ns, nwin):
     M[f"eps{e}Acc"] = f"{a_:.3f}"; M[f"eps{e}Size"] = f"{s_:.1f}"; M[f"eps{e}Above"] = str(w)

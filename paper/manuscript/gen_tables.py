@@ -169,6 +169,8 @@ tmed = d[d.method == "MHMG"].groupby("dataset").time_s.mean().loc[ORDER]
 rho_m, p_m = spearmanr(traits["m"].astype(float), tmed); rho_n, p_n = spearmanr(traits["n"].astype(float), tmed)
 assert max(p_m, p_n) < 0.01   # the prose says "both p < 0.01"
 mac("rhoTimeM", f"{rho_m:.2f}"); mac("rhoTimeN", f"{rho_n:.2f}")
+_pf = lambda v: "<0.001" if v < 0.001 else f"={v:.3f}"   # P < 0.001 convention; the sign is part of the macro
+mac("pTimeM", _pf(p_m)); mac("pTimeN", _pf(p_n))
 mac("timeMax", f"{tmed.max():.1f}"); mac("timeMaxDs", LABEL[tmed.idxmax()])
 mac("timeMin", f"{tmed.min():.1f}"); mac("timeMinDs", LABEL[tmed.idxmin()])
 

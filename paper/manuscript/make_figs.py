@@ -10,10 +10,22 @@ from scipy.stats import rankdata
 HERE = Path(__file__).resolve().parent
 E1, E3, FIG = HERE.parent / "e1", HERE.parent / "e3", Path(os.environ.get("FIG_DIR", HERE / "figures"))
 FIG.mkdir(exist_ok=True)
-_CM = os.environ.get("FIG_STYLE") == "cm"   # Computer Modern for the Springer (sn-jnl) version; Times for IEEE Access
-plt.rcParams.update({"font.family": "serif", "font.serif": (["cmr10"] if _CM else ["Times New Roman", "Times", "STIXGeneral"]),
-                     "mathtext.fontset": ("cm" if _CM else "stix"), "axes.formatter.use_mathtext": True,
+_CM = os.environ.get("FIG_STYLE") == "cm"   # Computer Modern for the single-column layout; Times for the two-column layout
+_TSP = os.environ.get("FIG_STYLE") == "tsp"   # Arial, labels of at least 8 pt, capital panel letters
+_SANS = os.environ.get("FIG_STYLE") in ("sans", "tsp")   # Arial/Helvetica for journals that ask for sans-serif artwork
+plt.rcParams.update({"font.family": "sans-serif" if _SANS else "serif",
+                     "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
+                     "font.serif": (["cmr10"] if _CM else ["Times New Roman", "Times", "STIXGeneral"]),
+                     "mathtext.fontset": ("cm" if _CM else "stixsans" if _SANS else "stix"), "axes.formatter.use_mathtext": True,
                      "font.size": 8, "axes.linewidth": 0.8, "pdf.fonttype": 42, "ps.fonttype": 42})
+if _TSP:   # every text at least 8 pt
+    import matplotlib.figure as _mf, matplotlib.text as _mt
+    _orig_savefig = _mf.Figure.savefig
+    def _savefig(self, *a, **k):
+        for t in self.findobj(_mt.Text):
+            if t.get_text() and t.get_fontsize() < 8: t.set_fontsize(8)
+        return _orig_savefig(self, *a, **k)
+    _mf.Figure.savefig = _savefig
 STY = {"MHMG": ("k", "o"), "L1": ("tab:blue", "s"), "FCQ": ("tab:green", "^"), "ReliefF": ("tab:orange", "v"),
        "F": ("tab:red", "d"), "RFE": ("tab:purple", "P"), "NRS*": ("tab:brown", "X"), "FNRS": ("tab:gray", "*"),
        "All attributes": ("tab:cyan", "h")}
@@ -44,7 +56,7 @@ def granules(X, y):
     return r, ne, (D < r[:, None]).sum(1)
 
 
-fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.7), sharex=True, sharey=True)
+fig, axes = plt.subplots(1, 2, figsize=((6.0, 2.9) if _TSP else (5.0, 2.7) if _SANS else (7.0, 2.7)), sharex=True, sharey=True)
 focus = int(np.argmin(((A - [0.6, 0.1]) ** 2).sum(1)))           # a class-0 sample near the boundary
 yf = y.copy(); flip = int(np.argmin(((X[:len(A)] - (X[focus] + [0.25, 0.35])) ** 2).sum(1) + (np.arange(len(A)) == focus) * 9))
 yf[flip] = 1
@@ -64,7 +76,17 @@ for ax, lab, title in ((axes[0], y, "(a) clean labels"), (axes[1], yf, "(b) one 
     if lab is yf:
         ax.annotate("flipped", X[flip] + [0.08, -0.3], fontsize=7, color="tab:red")
     extra = "" if lab is y else f"; {int(((g < g_clean) & (np.arange(len(y)) != flip)).sum())} granules shrink"
-    ax.set_title(f"{title}: $|G_B(x)|={g[focus]}${extra}", fontsize=8)
+    if _SANS:   # no titles inside illustrations, only the panel letter
+        if _TSP:   # panel letter in the top left corner, the count below it
+            ax.text(0.02, 0.97, title.split()[0].strip("()").upper(), transform=ax.transAxes, fontsize=10, fontweight="bold", va="top", zorder=6)
+            ax.text(0.02, 0.84, f"$|G_B(x)|={g[focus]}${extra}", transform=ax.transAxes, fontsize=8, va="top",
+                    bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.85), zorder=6)
+        else:
+            ax.set_title(title.split()[0], fontsize=8)
+            ax.text(0.03, 0.96, f"$|G_B(x)|={g[focus]}${extra}", transform=ax.transAxes, fontsize=7, va="top",
+                    bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.85), zorder=6)
+    else:
+        ax.set_title(f"{title}: $|G_B(x)|={g[focus]}${extra}", fontsize=8)
     ax.set_aspect("equal"); ax.set_xticks([]); ax.set_yticks([]); box(ax)
 axes[0].legend(loc="lower right", fontsize=6.5, frameon=True)
 fig.tight_layout(); fig.savefig(FIG / "fig_concept.pdf"); plt.close(fig)
@@ -74,7 +96,7 @@ N, k = len(acc), len(COLS)
 ranks = pd.DataFrame(np.vstack([rankdata(-acc.loc[i, COLS]) for i in acc.index]), columns=COLS).mean().sort_values()
 q = {9: 3.102}[k]                                                  # Demsar (2006), Table 5(a), alpha = 0.05
 cd = q * np.sqrt(k * (k + 1) / (6 * N))
-fig, ax = plt.subplots(figsize=(3.5, 2.1))
+fig, ax = plt.subplots(figsize=((5.0 if _TSP else 3.5), 2.1))
 lo, hi = 1, k
 ax.set_xlim(lo - 1.6, hi + 1.6); ax.set_ylim(0, 1.08); ax.axis("off")
 AX = 0.82
@@ -112,7 +134,7 @@ stc["m2"] = stc.method
 for ds, c in best.items():
     stc.loc[(stc.dataset == ds) & (stc.method == c), "m2"] = "NRS*"
 stab = stc[~stc.m2.isin(NRS)].groupby("m2").nogueira.median()
-fig, ax = plt.subplots(figsize=(3.5, 2.6))
+fig, ax = plt.subplots(figsize=((5.0 if _TSP else 3.5), 2.6))
 for m in ["MHMG", "F", "FCQ", "ReliefF", "L1", "RFE", "NRS*", "FNRS"]:
     c, mk = STY[m]
     ax.scatter(stab[m], acc[m].mean(), color=c, marker=mk, s=40, edgecolors="k", linewidths=0.4, zorder=3)
@@ -127,7 +149,7 @@ fig.tight_layout(); fig.savefig(FIG / "fig_stab_acc.pdf"); plt.close(fig)
 p2 = pd.read_csv(HERE / "check_prop2.csv").groupby("dataset").frac_changed.mean()
 p2r = pd.read_csv(HERE / "check_prop2_random.csv").groupby("dataset")[["frac_changed", "s_over"]].mean()
 order = p2.sort_values().index
-fig, ax = plt.subplots(figsize=(3.5, 3.0))
+fig, ax = plt.subplots(figsize=((5.0 if _TSP else 3.5), 3.0))
 yy = np.arange(len(order))
 ax.scatter(p2.loc[order], yy, color="k", marker="o", s=22, label="MHMG attributes", zorder=3)
 ax.scatter(p2r.loc[order, "frac_changed"], yy, color="tab:orange", marker="s", s=18, label="random attributes, same size", zorder=3)
@@ -148,7 +170,7 @@ clean = raw[raw.method.isin(["MHMG", "F", "FCQ", "ReliefF", "L1", "FNRS", "ALL"]
 clean_n = pd.concat([raw[(raw.dataset == ds) & (raw.method == c)] for ds, c in best.items()]).assign(method="NRS*", rho=0.0)
 allr = pd.concat([clean, clean_n, n3, ns, nf], ignore_index=True).replace({"method": {"ALL": "All attributes"}})
 curve = allr.groupby(["dataset", "rho", "method"]).knn_acc.mean().groupby(level=["rho", "method"]).mean().unstack()
-fig, ax = plt.subplots(figsize=(3.5, 3.0))
+fig, ax = plt.subplots(figsize=((5.0 if _TSP else 3.5), 3.0))
 for m in ["MHMG", "NRS*", "FNRS", "L1", "FCQ", "ReliefF", "F", "All attributes"]:
     c, mk = STY[m]
     nearest = m in ("MHMG", "NRS*", "FNRS")
@@ -162,7 +184,7 @@ base = raw[raw.method.isin(["MHMG", "F", "FCQ", "ReliefF", "L1", "RFE", "FNRS", 
 nrs_s = pd.concat([raw[(raw.dataset == ds) & (raw.method == c)] for ds, c in best.items()]).assign(method="NRS*")
 pts = pd.concat([base, nrs_s, t4], ignore_index=True).assign(size=lambda x: np.where(x.method == "ALL", x.n_attr, x["size"]))
 ag = pts.groupby(["dataset", "method"])[["knn_acc", "size"]].mean().groupby(level="method").agg({"knn_acc": "mean", "size": "median"})
-fig, ax = plt.subplots(figsize=(3.5, 2.9))
+fig, ax = plt.subplots(figsize=((5.0 if _TSP else 3.5), 2.9))
 same = ["F", "FCQ", "ReliefF", "L1", "RFE"]
 ax.scatter(ag.loc[same, "size"], ag.loc[same, "knn_acc"], s=16, color="0.6", zorder=2, label="same size as MHMG")
 tuned = ["L1-cv", "FCQ-cv", "ReliefF-cv", "RFE-cv", "F-cv", "NRS-cv"]
